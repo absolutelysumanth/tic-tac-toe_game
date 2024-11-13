@@ -31,6 +31,7 @@ function handleCellClick(event) {
     // Update board state and display current player's symbol
     board[index] = currentPlayer;
     cell.textContent = currentPlayer;
+    cell.classList.add(currentPlayer); // Add class 'X' or 'O' for styling
 
     // Check if there's a winner or if it's a draw
     if (checkWinner()) {
@@ -45,18 +46,20 @@ function handleCellClick(event) {
     }
 }
 
+
+
 function checkWinner() {
     return winningCombinations.some(combination => {
         const [a, b, c] = combination;
         return board[a] && board[a] === board[b] && board[a] === board[c];
     });
 }
-
 function resetGame() {
     board = Array(9).fill(null);
     gameOver = false;
     currentPlayer = 'X';
     cells.forEach(cell => {
         cell.textContent = '';
+        cell.classList.remove('X', 'O'); // Remove classes for a clean reset
     });
 }
